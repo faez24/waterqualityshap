@@ -9,14 +9,14 @@ services:
     container_name: watershap-api
     restart: unless-stopped
     ports:
-      - "8000:8000"
+      - "8091:8091"
     volumes:
       # Mount PKL supaya bisa diupdate tanpa rebuild image
       - ./mean_shap_per_class.pkl:/workspace/mean_shap_per_class.pkl:ro
     environment:
       - PYTHONUNBUFFERED=1
     healthcheck:
-      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      test: ["CMD", "curl", "-f", "http://localhost:8091/health"]
       interval: 30s
       timeout: 10s
       retries: 3
