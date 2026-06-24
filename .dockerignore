@@ -1,0 +1,16 @@
+# Water Quality SHAP API — .dockerignore
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.Python
+*.egg-info/
+.env
+.env.*
+.git/
+.gitignore
+.vscode/
+.idea/
+*.md
+*.log
+tests/

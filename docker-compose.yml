@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  watershap-api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: watershap-api:latest
+    container_name: watershap-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    volumes:
+      # Mount PKL supaya bisa diupdate tanpa rebuild image
+      - ./mean_shap_per_class.pkl:/workspace/mean_shap_per_class.pkl:ro
+    environment:
+      - PYTHONUNBUFFERED=1
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 10s
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
